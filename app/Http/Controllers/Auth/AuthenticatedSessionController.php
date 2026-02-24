@@ -28,6 +28,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        // Handle pending invite after login
+        if (session()->has('invite_token')) {
+          $token = session()->pull('invite_token');
+          return redirect()->route('invites.accept', $token);
+        }
+
         return redirect()->intended(route('dashboard', absolute: false));
     }
 

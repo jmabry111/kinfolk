@@ -41,9 +41,14 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($user));
+        $inviteToken = session()->get('invite_token');
 
+        event(new Registered($user));
         Auth::login($user);
+
+        if ($inviteToken) {
+          return redirect()->route('invites.accept', $inviteToken);
+        }
 
         return redirect(route('dashboard', absolute: false));
     }

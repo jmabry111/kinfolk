@@ -47,4 +47,14 @@ Route::prefix('family-groups/{familyGroup}/contacts/{contact}')->group(function 
     Route::delete('gifts/{gift}', [GiftController::class, 'destroy'])->name('gifts.destroy');
 });
 
+use App\Http\Controllers\GroupInviteController;
+
+// Inside the auth middleware group:
+Route::get('family-groups/{familyGroup}/invite', [GroupInviteController::class, 'create'])
+    ->name('invites.create');
+
+// Outside the auth middleware group (invite links work for non-logged-in users):
+Route::get('invites/{token}', [GroupInviteController::class, 'accept'])
+  ->name('invites.accept');
+
 require __DIR__.'/auth.php';
