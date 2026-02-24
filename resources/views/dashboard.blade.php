@@ -1,0 +1,70 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            Upcoming Birthdays
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
+
+            @if($upcoming30->isEmpty() && $upcoming60->isEmpty() && $upcoming90->isEmpty())
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 text-gray-500">
+                    No upcoming birthdays in the next 90 days. 
+                    <a href="{{ route('family-groups.index') }}" class="text-indigo-600 underline ml-1">
+                        Add some contacts
+                    </a> to get started.
+                </div>
+            @endif
+
+            {{-- Next 30 Days --}}
+            @if($upcoming30->isNotEmpty())
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-3 flex items-center gap-2">
+                        <span class="bg-rose-100 text-rose-600 text-xs font-bold px-2 py-1 rounded-full">
+                            Next 30 Days
+                        </span>
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        @foreach($upcoming30 as $contact)
+                            @include('partials.birthday-card', ['contact' => $contact, 'urgency' => 'high'])
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+
+            {{-- 31-60 Days --}}
+            @if($upcoming60->isNotEmpty())
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-3">
+                        <span class="bg-amber-100 text-amber-600 text-xs font-bold px-2 py-1 rounded-full">
+                            31–60 Days
+                        </span>
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        @foreach($upcoming60 as $contact)
+                            @include('partials.birthday-card', ['contact' => $contact, 'urgency' => 'medium'])
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+
+            {{-- 61-90 Days --}}
+            @if($upcoming90->isNotEmpty())
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-3">
+                        <span class="bg-sky-100 text-sky-600 text-xs font-bold px-2 py-1 rounded-full">
+                            61–90 Days
+                        </span>
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        @foreach($upcoming90 as $contact)
+                            @include('partials.birthday-card', ['contact' => $contact, 'urgency' => 'low'])
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+
+        </div>
+    </div>
+</x-app-layout>
