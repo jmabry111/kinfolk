@@ -32,15 +32,6 @@ public function accept(string $token)
 {
     $invite = GroupInvite::where('token', $token)->firstOrFail();
 
-    \Log::info('Invite accept called', [
-        'token' => $token,
-        'is_valid' => $invite->isValid(),
-        'is_expired' => $invite->isExpired(),
-        'is_used' => $invite->isUsed(),
-        'auth_check' => Auth::check(),
-        'user_id' => Auth::id(),
-    ]);
-
     if (!$invite->isValid()) {
         return view('invites.invalid');
     }
@@ -55,11 +46,6 @@ public function accept(string $token)
     $user = Auth::user();
     $group = $invite->familyGroup;
 
-    \Log::info('Adding user to group', [
-        'user_id' => $user->id,
-        'group_id' => $group->id,
-        'already_member' => $group->members()->where('user_id', $user->id)->exists(),
-    ]);
 
     if ($group->members()->where('user_id', $user->id)->exists()) {
         return redirect()->route('family-groups.show', $group)
