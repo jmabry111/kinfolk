@@ -57,4 +57,8 @@ Route::get('family-groups/{familyGroup}/invite', [GroupInviteController::class, 
 Route::get('invites/{token}', [GroupInviteController::class, 'accept'])
   ->name('invites.accept');
 
+Route::get('/', function () {
+    return view('welcome');
+})->name('home');
+
 require __DIR__.'/auth.php';
