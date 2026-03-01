@@ -1,59 +1,206 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Kinfolk 🪑❤️
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> *Never forget a birthday again.*
 
-## About Laravel
+Kinfolk is a warm, family-friendly web app that helps you stay connected with the people who matter most. Track birthdays, coordinate gift ideas, and show up for your family and friends — with a little southern hospitality.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ✨ Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Upcoming Birthdays Dashboard** — see everyone's birthdays at a glance, color-coded by urgency (30 / 60 / 90 days)
+- **Kin & Folk Classification** — classify contacts as Kin (family) or Folk (friends & others)
+- **Gift Ideas** — track gift ideas per person with public/private visibility and purchased state
+- **Anonymous Purchase Tracking** — mark gifts as "covered" without revealing who bought them
+- **Family Groups** — create shared groups and invite members to coordinate together
+- **Invite Links** — share single-use, expiring invite links with family and friends
+- **Email Reminders** — automated birthday reminders sent 30 and 7 days in advance
+- **Responsive UI** — works on desktop and mobile
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## 🛠 Tech Stack
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| Layer | Technology |
+|---|---|
+| Framework | [Laravel 12](https://laravel.com) |
+| Frontend | Blade, Tailwind CSS, Alpine.js |
+| Database | MariaDB (via Laravel Sail) |
+| Auth | Laravel Breeze |
+| Mail | Mailpit (local), SMTP (production) |
+| Dev Environment | Docker / Laravel Sail |
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🚀 Getting Started
 
-### Premium Partners
+### Prerequisites
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- PHP 8.2+ (for Composer)
+- Node.js & npm
 
-## Contributing
+### Installation
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**1. Clone the repo**
+```bash
+git clone https://github.com/jmabry111/kinfolk.git
+cd kinfolk
+```
 
-## Code of Conduct
+**2. Install PHP dependencies**
+```bash
+composer install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**3. Copy the environment file**
+```bash
+cp .env.example .env
+```
 
-## Security Vulnerabilities
+**4. Start Laravel Sail**
+```bash
+./vendor/bin/sail up -d
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+**5. Generate app key**
+```bash
+sail artisan key:generate
+```
 
-## License
+**6. Run migrations and seed**
+```bash
+sail artisan migrate --seed --seeder=SitcomSeeder
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**7. Install and build frontend assets**
+```bash
+sail npm install
+sail npm run build
+```
+
+**8. Visit the app**
+
+Open [http://localhost](http://localhost) in your browser.
+
+---
+
+## 🎭 Seed Data
+
+The `SitcomSeeder` populates the app with fun test data from five classic TV shows:
+
+| Group | Show |
+|---|---|
+| The Simpsons | *The Simpsons* |
+| The Bundy Family | *Married with Children* |
+| Dunder Mifflin Scranton | *The Office* |
+| The Pritchett-Dunphy-Tucker Clan | *Modern Family* |
+| Cloud 9 Crew | *Superstore* |
+
+**Test accounts:**
+```
+jason@example.com / password
+pam@example.com   / password
+```
+
+---
+
+## 📧 Email Reminders
+
+Birthday reminders are sent via a scheduled Artisan command:
+
+```bash
+sail artisan kinfolk:send-birthday-reminders
+```
+
+This command sends reminders for any contacts with birthdays exactly **7 or 30 days** from today. In production, schedule it to run daily at 8:00 AM via `routes/console.php`:
+
+```php
+Schedule::command('kinfolk:send-birthday-reminders')->dailyAt('08:00');
+```
+
+For local development, emails are caught by [Mailpit](http://localhost:8025).
+
+---
+
+## 📁 Project Structure
+
+```
+app/
+├── Console/Commands/       # SendBirthdayReminders command
+├── Http/Controllers/       # FamilyGroup, Contact, Gift, GroupInvite, Dashboard
+├── Mail/                   # BirthdayReminder mailable
+├── Models/                 # User, FamilyGroup, Contact, Gift, GroupInvite
+database/
+├── migrations/             # All database migrations
+├── seeders/                # SitcomSeeder
+resources/
+├── views/
+│   ├── layouts/            # app.blade.php, navigation.blade.php, guest.blade.php
+│   ├── family-groups/      # index, create, show
+│   ├── contacts/           # create, edit, show
+│   ├── gifts/              # create, edit
+│   ├── invites/            # created, invalid
+│   ├── emails/             # birthday-reminder
+│   ├── partials/           # birthday-card
+│   └── welcome.blade.php   # Public landing page
+public/images/              # Logo files (color + light versions)
+routes/
+├── web.php                 # All web routes
+└── console.php             # Scheduled commands
+```
+
+---
+
+## 🗄 Database Schema
+
+```
+users
+family_groups        (owner_id → users)
+family_group_user    (pivot: family_group_id, user_id, role)
+contacts             (family_group_id, added_by → users)
+gifts                (contact_id, user_id, purchased_by → users)
+group_invites        (family_group_id, created_by → users, token, expires_at, used_at)
+```
+
+---
+
+## 🎨 Brand
+
+Kinfolk uses a custom color palette inspired by the logo:
+
+| Name | Hex | Usage |
+|---|---|---|
+| Slate | `#2A333D` | Primary text, nav background |
+| Sage | `#9FC8A9` | Accents, badges, highlights |
+| Blue | `#3A629D` | Links, headings, secondary actions |
+| Cream | `#FAF7F4` | Page backgrounds |
+
+Fonts: **Playfair Display** (serif/display) + **Lato** (body)
+
+---
+
+## 📖 Documentation
+
+- [**User Guide**](https://docs.google.com/document/d/1lD7Mm0oJDvbf_4BiOTGjdFVWRRAj9aXtbIJKpR92tGA/edit?usp=sharing) — full walkthrough of all features for end users
+
+---
+
+## 🗺 Roadmap
+
+- [ ] Profile settings (name, email, password)
+- [ ] Contact photo uploads
+- [ ] Wishlist view — let contacts add their own gift wishes
+- [ ] Push notifications
+- [ ] Mobile app (React Native)
+- [ ] Admin dashboard
+
+---
+
+## 📄 License
+
+This project is licensed under the [GPL-3.0 License](LICENSE).
+
+---
+
+<p align="center">Made with ♥ for family & friends</p>
