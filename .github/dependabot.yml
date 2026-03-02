@@ -24,6 +24,9 @@ updates:
     labels:
       - "dependencies"
       - "javascript"
+    ignore:
+      - dependency-name: "tailwindcss"
+      - versions: [">=4.0.0"]
 
   # GitHub Actions
   - package-ecosystem: "github-actions"
