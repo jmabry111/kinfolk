@@ -30,7 +30,11 @@
     </div>
 
     <div class="flex justify-between items-center text-sm text-gray-500">
-        <span>{{ $contact->birthday->format('F j') }} &middot; Turning {{ $contact->age + 1 }}</span>
+@if($contact->birth_year_unknown ?? false)
+    <span class="text-slate-500 text-sm">{{ $contact->generation ?? 'Generation unknown' }}</span>
+@else
+    <span class="text-slate-500 text-sm">Turning {{ \Carbon\Carbon::parse($contact->birthday)->age + 1 }}</span>
+@endif
         <span class="text-xs px-2 py-0.5 rounded-full {{ $contact->is_kin ? 'bg-rose-100 text-rose-600' : 'bg-sky-100 text-sky-600' }}">
             {{ $contact->is_kin ? 'Kin' : 'Folk' }}
         </span>

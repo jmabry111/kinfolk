@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contact extends Model
 {
-    protected $fillable = ['family_group_id', 'added_by', 'name', 'relationship_type', 'birthday', 'interest_tags', 'is_kin'];
+    protected $fillable = ['family_group_id', 'added_by', 'name', 'relationship_type', 'birthday', 'interest_tags', 'is_kin', 'birth_year_unknown', 'generation'];
 
     protected $casts = [
         'birthday' => 'date',
         'interest_tags' => 'array',
+        'birth_year_unknown' => 'boolean',
     ];
 
     public function familyGroup()
@@ -40,5 +41,13 @@ class Contact extends Model
             $next = $next->addYear();
         }
         return (int) now()->diffInDays($next);
+    }
+
+    public function getAgeOrGenerationAttribute(): string
+    {
+        if ($this->birth_year_unknown) {
+            return '~' . ($this->generation ?? 'Unknown generation');
+        }
+        return 'Turning ' . ($this->birthday->age + 1);
     }
 }
