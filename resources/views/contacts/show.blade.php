@@ -37,15 +37,33 @@
         </span>
     </dd>
 </div>
-                    <div>
-                        <dt class="text-sm text-gray-500">Birthday</dt>
-                        <dd class="text-gray-800 font-medium">{{ $contact->birthday->format('F j, Y') }}</dd>
-                    </div>
-                    <div>
-                        <dt class="text-sm text-gray-500">Age</dt>
-                        <dd class="text-gray-800 font-medium">{{ $contact->age }}</dd>
-                    </div>
-                    <div>
+{{-- Birthday --}}
+<div>
+    <p class="text-sm text-slate-500">Birthday</p>
+    @if($contact->birth_year_unknown)
+        <p class="font-semibold text-slate-700">
+            {{ $contact->birthday->format('F j') }}
+        </p>
+    @else
+        <p class="font-semibold text-slate-700">
+            {{ $contact->birthday->format('F j, Y') }}
+        </p>
+    @endif
+</div>
+{{-- Age --}}
+<div>
+<p class="text-sm text-slate-500">{{ $contact->birth_year_unknown ? 'Generation' : 'Age' }}</p>
+    @if($contact->birth_year_unknown)
+        <p class="font-semibold text-slate-700">
+            {{ $contact->generation ?? 'Unknown' }}
+        </p>
+    @else
+        <p class="font-semibold text-slate-700">
+            {{ $contact->birthday->age }}
+        </p>
+    @endif
+</div>
+<div>
                         <dt class="text-sm text-gray-500">Birthday In</dt>
                         <dd class="text-gray-800 font-medium">{{ $contact->days_until_birthday }} days</dd>
                     </div>
