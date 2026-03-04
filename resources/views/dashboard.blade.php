@@ -79,7 +79,7 @@
 
         </div>
 @if($laterHolidays->count() > 0)
-<div class="mt-10">
+<div class="mt-10 max-w-4xl mx-auto">
     <h2 class="text-2xl font-serif font-bold text-slate-700 mb-6">Later This Year</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         @foreach($laterHolidays as $holiday)
