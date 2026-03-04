@@ -1,4 +1,6 @@
 @php
+    $daysAway = $contact->days_away ?? $contact->days_until_birthday;
+    $urgency = $daysAway <= 30 ? 'high' : ($daysAway <= 60 ? 'medium' : 'low');
     $borderColor = match($urgency) {
         'high'   => 'border-rose-300',
         'medium' => 'border-amber-300',
