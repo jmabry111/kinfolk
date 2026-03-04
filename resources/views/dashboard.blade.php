@@ -67,4 +67,38 @@
 
         </div>
     </div>
+{{-- Upcoming Holidays --}}
+<div class="mt-10">
+    <h2 class="text-2xl font-serif font-bold text-slate-700 mb-6">Upcoming Holidays</h2>
+
+    @if(empty($holidays))
+        <p class="text-slate-500">No upcoming holidays found.</p>
+    @else
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            @foreach($holidays as $holiday)
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-cream-300 flex items-center gap-4">
+                    <div class="w-12 h-12 bg-sage-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-sage-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-slate-700">{{ $holiday['name'] }}</p>
+                        <p class="text-sm text-slate-500">{{ $holiday['formatted'] }}</p>
+                        <p class="text-xs text-sage-500 mt-1">
+                            @if($holiday['days_away'] == 0)
+                                Today!
+                            @elseif($holiday['days_away'] == 1)
+                                Tomorrow
+                            @else
+                                In {{ $holiday['days_away'] }} days
+                            @endif
+                        </p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    @endif
+</div>
 </x-app-layout>

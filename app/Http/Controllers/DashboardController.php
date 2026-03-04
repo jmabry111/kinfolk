@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Services\HolidayService;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -24,10 +25,14 @@ class DashboardController extends Controller
             ->sortBy('days_away')
             ->values();
 
-        $upcoming30  = $contacts->where('days_away', '<=', 30);
-        $upcoming60  = $contacts->whereBetween('days_away', [31, 60]);
-        $upcoming90  = $contacts->whereBetween('days_away', [61, 90]);
+        $upcoming30 = $contacts->where('days_away', '<=', 30);
+        $upcoming60 = $contacts->whereBetween('days_away', [31, 60]);
+        $upcoming90 = $contacts->whereBetween('days_away', [61, 90]);
 
-        return view('dashboard', compact('upcoming30', 'upcoming60', 'upcoming90'));
+        // Get upcoming holidays for the rest of the year
+        $holidayService = new HolidayService();
+        $holidays = $holidayService->getUpcomingHolidays();
+
+        return view('dashboard', compact('upcoming30', 'upcoming60', 'upcoming90', 'holidays'));
     }
 }
