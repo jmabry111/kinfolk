@@ -51,7 +51,10 @@
         </div>
 
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-36 text-center">
-            <p class="text-sage-400 font-serif italic text-lg mb-4 tracking-wide">never forget a birthday again</p>
+<!--            <p class="text-sage-400 font-serif italic text-lg mb-4 tracking-wide">never forget a birthday again</p>-->
+                {{-- Rotating Bible Verse --}}
+                <p id="verse-text" class="text-sage-300 font-serif italic text-lg mb-4 tracking-wide transition-opacity duration-700 opacity-100"></p>
+                <p id="verse-reference" class="text-sage-400 text-sm mb-4 tracking-widest transition-opacity duration-700 opacity-100"></p>
             <h1 class="font-serif text-5xl md:text-7xl font-bold text-white leading-tight mb-6">
                 Stay close to the ones<br class="hidden md:block"> you love most
             </h1>
@@ -209,6 +212,43 @@
             <p class="text-slate-400 text-sm">Made with ♥ for family &amp; friends</p>
         </div>
     </footer>
+
+<script>
+    async function loadVerses() {
+        const res = await fetch('/verses.json');
+        const verses = await res.json();
+        const verseText = document.getElementById('verse-text');
+        const verseRef = document.getElementById('verse-reference');
+
+        // Pick a random starting verse
+        let index = Math.floor(Math.random() * verses.length);
+
+        function showVerse() {
+            // Fade out
+            verseText.style.opacity = '0';
+            verseRef.style.opacity = '0';
+
+            setTimeout(() => {
+                verseText.textContent = `"${verses[index].text}"`;
+                verseRef.textContent = `— ${verses[index].reference}`;
+
+                // Fade in
+                verseText.style.opacity = '1';
+                verseRef.style.opacity = '1';
+
+                index = (index + 1) % verses.length;
+            }, 700);
+        }
+
+        // Show first verse immediately
+        showVerse();
+
+        // Rotate every 8 seconds
+        //setInterval(showVerse, 8000);
+    }
+
+    loadVerses();
+</script>
 
 </body>
 </html>
