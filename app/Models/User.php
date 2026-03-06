@@ -6,6 +6,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Contact;
+use App\Models\FamilyGroup;
+use App\Models\Gift;
 
 class User extends Authenticatable
 {
@@ -21,6 +24,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_admin',
+        'is_active',
+        'walkthrough_completed',
     ];
 
     /**
@@ -43,12 +49,20 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_admin' => 'boolean',
+            'is_active' => 'boolean',
+            'walkthrough_completed' => 'boolean',
         ];
     }
 
+  public function contacts()
+  {
+    return $this->hasMany(Contact::class, 'added_by');
+  }
+
   public function familyGroups()
   {
-    return $this->hasMany(FamilyGroup::class, 'owner_id');
+    return $this->belongsToMany(FamilyGroup::class, 'family_group_user');
   }
 
   public function ownedFamilyGroups()

@@ -13,15 +13,15 @@
                 <div class="hidden sm:flex sm:items-center sm:gap-1">
                     <a href="{{ route('dashboard') }}"
                        class="px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-150
-                              {{ request()->routeIs('dashboard') 
-                                 ? 'bg-slate-700 text-white' 
+                              {{ request()->routeIs('dashboard')
+                                 ? 'bg-slate-700 text-white'
                                  : 'text-slate-200 hover:bg-slate-700 hover:text-white' }}">
                         Dashboard
                     </a>
                     <a href="{{ route('family-groups.index') }}"
                        class="px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-150
-                              {{ request()->routeIs('family-groups.*') 
-                                 ? 'bg-slate-700 text-white' 
+                              {{ request()->routeIs('family-groups.*')
+                                 ? 'bg-slate-700 text-white'
                                  : 'text-slate-200 hover:bg-slate-700 hover:text-white' }}">
                         My Groups
                     </a>
@@ -48,16 +48,34 @@
                             <p class="text-xs text-gray-500">Signed in as</p>
                             <p class="text-sm font-medium text-gray-800 truncate">{{ Auth::user()->email }}</p>
                         </div>
+
                         <x-dropdown-link :href="route('profile.edit')">
                             Profile Settings
                         </x-dropdown-link>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <x-dropdown-link :href="route('logout')"
-                                onclick="event.preventDefault(); this.closest('form').submit();">
-                                Sign Out
-                            </x-dropdown-link>
-                        </form>
+
+                        @if(Auth::user()->is_admin)
+                            <div class="border-t border-gray-100 mt-1 pt-1">
+                                <x-dropdown-link :href="route('admin.users.index')">
+                                    <span class="flex items-center gap-2">
+                                        <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                        </svg>
+                                        Admin Panel
+                                    </span>
+                                </x-dropdown-link>
+                            </div>
+                        @endif
+
+                        <div class="border-t border-gray-100 mt-1 pt-1">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault(); this.closest('form').submit();">
+                                    Sign Out
+                                </x-dropdown-link>
+                            </form>
+                        </div>
                     </x-slot>
                 </x-dropdown>
             </div>
@@ -83,18 +101,27 @@
         <div class="px-4 py-3 space-y-1">
             <a href="{{ route('dashboard') }}"
                class="block px-4 py-2 rounded-lg text-sm font-medium
-                      {{ request()->routeIs('dashboard') 
-                         ? 'bg-slate-700 text-white' 
+                      {{ request()->routeIs('dashboard')
+                         ? 'bg-slate-700 text-white'
                          : 'text-slate-200 hover:bg-slate-700 hover:text-white' }}">
                 Dashboard
             </a>
             <a href="{{ route('family-groups.index') }}"
                class="block px-4 py-2 rounded-lg text-sm font-medium
-                      {{ request()->routeIs('family-groups.*') 
-                         ? 'bg-slate-700 text-white' 
+                      {{ request()->routeIs('family-groups.*')
+                         ? 'bg-slate-700 text-white'
                          : 'text-slate-200 hover:bg-slate-700 hover:text-white' }}">
                 My Groups
             </a>
+            @if(Auth::user()->is_admin)
+                <a href="{{ route('admin.users.index') }}"
+                   class="block px-4 py-2 rounded-lg text-sm font-medium
+                          {{ request()->routeIs('admin.*')
+                             ? 'bg-slate-700 text-white'
+                             : 'text-slate-200 hover:bg-slate-700 hover:text-white' }}">
+                    Admin Panel
+                </a>
+            @endif
         </div>
         <div class="px-4 py-3 border-t border-slate-700">
             <div class="flex items-center gap-3 mb-3">

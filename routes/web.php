@@ -1,33 +1,39 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FamilyGroupController;
+use App\Http\Controllers\GiftController;
+use App\Http\Controllers\GroupInviteController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+// Landing page
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
+// Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])
-  ->middleware(['auth', 'verified'])
-  ->name('dashboard');
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
+// Profile
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-use App\Http\Controllers\FamilyGroupController;
-
+// Family Groups
 Route::middleware('auth')->group(function () {
     Route::resource('family-groups', FamilyGroupController::class)
         ->except(['edit', 'update']);
 });
 
-use App\Http\Controllers\ContactController;
-
-Route::prefix('family-groups/{familyGroup}')->group(function () {
+// Contacts
+Route::middleware('auth')->prefix('family-groups/{familyGroup}')->group(function () {
     Route::get('contacts/create', [ContactController::class, 'create'])->name('contacts.create');
     Route::post('contacts', [ContactController::class, 'store'])->name('contacts.store');
     Route::get('contacts/{contact}', [ContactController::class, 'show'])->name('contacts.show');
@@ -36,9 +42,8 @@ Route::prefix('family-groups/{familyGroup}')->group(function () {
     Route::delete('contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
 });
 
-use App\Http\Controllers\GiftController;
-
-Route::prefix('family-groups/{familyGroup}/contacts/{contact}')->group(function () {
+// Gifts
+Route::middleware('auth')->prefix('family-groups/{familyGroup}/contacts/{contact}')->group(function () {
     Route::get('gifts/create', [GiftController::class, 'create'])->name('gifts.create');
     Route::post('gifts', [GiftController::class, 'store'])->name('gifts.store');
     Route::get('gifts/{gift}/edit', [GiftController::class, 'edit'])->name('gifts.edit');
@@ -47,18 +52,18 @@ Route::prefix('family-groups/{familyGroup}/contacts/{contact}')->group(function 
     Route::delete('gifts/{gift}', [GiftController::class, 'destroy'])->name('gifts.destroy');
 });
 
-use App\Http\Controllers\GroupInviteController;
-
-// Inside the auth middleware group:
-Route::get('family-groups/{familyGroup}/invite', [GroupInviteController::class, 'create'])
+// Invites
+Route::middleware('auth')->get('family-groups/{familyGroup}/invite', [GroupInviteController::class, 'create'])
     ->name('invites.create');
-
-// Outside the auth middleware group (invite links work for non-logged-in users):
 Route::get('invites/{token}', [GroupInviteController::class, 'accept'])
-  ->name('invites.accept');
+    ->name('invites.accept');
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+// Admin
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/users', [AdminController::class, 'index'])->name('users.index');
+    Route::get('/users/{user}', [AdminController::class, 'show'])->name('users.show');
+    Route::patch('/users/{user}/toggle-active', [AdminController::class, 'toggleActive'])->name('users.toggle-active');
+    Route::delete('/users/{user}', [AdminController::class, 'destroy'])->name('users.destroy');
+});
 
 require __DIR__.'/auth.php';
