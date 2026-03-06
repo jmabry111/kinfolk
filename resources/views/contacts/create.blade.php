@@ -32,7 +32,7 @@
                         <select name="relationship_type" id="relationship_type"
                                 class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                             <option value="">-- Select --</option>
-                            @foreach(['Parent', 'Sibling', 'Child', 'Grandparent', 'Aunt/Uncle', 'Cousin', 'Spouse/Partner', 'Friend', 'Coworker', 'Other'] as $type)
+                            @foreach(['Parent', 'Sibling', 'Child', 'Grandparent', 'Aunt/Uncle', 'Niece/Nephew', 'Cousin', 'Spouse/Partner', 'Friend', 'Coworker', 'Other'] as $type)
                                 <option value="{{ $type }}" {{ old('relationship_type') == $type ? 'selected' : '' }}>
                                     {{ $type }}
                                 </option>
