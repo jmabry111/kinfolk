@@ -7,6 +7,7 @@ use App\Http\Controllers\FamilyGroupController;
 use App\Http\Controllers\GiftController;
 use App\Http\Controllers\GroupInviteController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WalkthroughController;
 use Illuminate\Support\Facades\Route;
 
 // Landing page
@@ -64,6 +65,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/users/{user}', [AdminController::class, 'show'])->name('users.show');
     Route::patch('/users/{user}/toggle-active', [AdminController::class, 'toggleActive'])->name('users.toggle-active');
     Route::delete('/users/{user}', [AdminController::class, 'destroy'])->name('users.destroy');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('/walkthrough/complete', [WalkthroughController::class, 'complete'])->name('walkthrough.complete');
+    Route::post('/walkthrough/reset', [WalkthroughController::class, 'reset'])->name('walkthrough.reset');
 });
 
 require __DIR__.'/auth.php';

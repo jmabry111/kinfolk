@@ -19,6 +19,7 @@
         "vite": "^7.0.7"
     },
     "dependencies": {
-        "@tailwindcss/postcss": "^4.2.1"
+        "@tailwindcss/postcss": "^4.2.1",
+        "shepherd.js": "^15.2.1"
     }
 }

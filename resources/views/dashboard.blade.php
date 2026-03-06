@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight dashboard-upcoming">
             Upcoming Holidays and Birthdays
         </h2>
     </x-slot>
@@ -89,4 +89,11 @@
 </div>
 @endif
     </div>
+@if(!auth()->user()->walkthrough_completed || request('tour'))
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => window.startKinfolkTour(), 500);
+    });
+</script>
+@endif
 </x-app-layout>
