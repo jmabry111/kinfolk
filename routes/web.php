@@ -71,11 +71,4 @@ Route::middleware('auth')->group(function () {
     Route::post('/walkthrough/complete', [WalkthroughController::class, 'complete'])->name('walkthrough.complete');
     Route::post('/walkthrough/reset', [WalkthroughController::class, 'reset'])->name('walkthrough.reset');
 });
-
-Route::get('/setup-admin', function () {
-    \App\Models\User::where('email', 'jmabry@mymabry.com')
-        ->update(['is_admin' => true, 'is_active' => true]);
-    return 'Admin setup complete!';
-});
-
 require __DIR__.'/auth.php';
