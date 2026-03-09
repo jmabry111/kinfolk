@@ -8,6 +8,13 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
     ],
+    
+    safelist: [
+      'translate-x-1',
+      'translate-x-6',
+      'bg-green-500',
+      'bg-slate-300',
+    ],
 
     theme: {
         extend: {

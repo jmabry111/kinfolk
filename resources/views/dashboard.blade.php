@@ -1,19 +1,22 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
+        <div class="flex justify-between items-center" x-data="{}">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight dashboard-upcoming">
                 Upcoming Holidays and Birthdays
             </h2>
-            <button @click="showHolidays = !showHolidays"
-                    class="flex items-center gap-2 text-sm font-medium px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-50 transition-colors text-slate-600">
-                <span x-text="showHolidays ? '🎉 Hide Holidays' : '🎉 Show Holidays'"></span>
-            </button>
-        </div>
+<button @click="$store.dashboard.toggle()"
+        class="flex items-center gap-2 text-sm text-slate-600 font-medium cursor-pointer">
+    <span>🎉 Holidays</span>
+    <div class="relative inline-flex items-center w-11 h-6 rounded-full transition-colors duration-200"
+         :class="$store.dashboard.showHolidays ? 'bg-green-500' : 'bg-slate-300'">
+        <span class="inline-block w-4 h-4 bg-white rounded-full shadow transform transition-transform duration-200"
+              :class="$store.dashboard.showHolidays ? 'translate-x-6' : 'translate-x-1'">
+        </span>
+    </div>
+</button>
     </x-slot>
 
-    <div x-data="{ showHolidays: localStorage.getItem('showHolidays') !== 'false' }"
-         x-init="$watch('showHolidays', val => localStorage.setItem('showHolidays', val))"
-         class="py-12">
+    <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
 
             @if($upcoming30->isEmpty() && $upcoming60->isEmpty() && $upcoming90->isEmpty())
@@ -36,7 +39,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         @foreach($upcoming30 as $item)
                             @if(is_array($item) && ($item['type'] ?? '') === 'holiday')
-                                <div x-show="showHolidays" x-cloak>
+                                <div x-data="{}" x-show="$store.dashboard.showHolidays" x-cloak>
                                     @include('partials.holiday-card', ['holiday' => $item])
                                 </div>
                             @else
@@ -58,7 +61,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         @foreach($upcoming60 as $item)
                             @if(is_array($item) && ($item['type'] ?? '') === 'holiday')
-                                <div x-show="showHolidays" x-cloak>
+                                <div x-data="{}" x-show="$store.dashboard.showHolidays" x-cloak>
                                     @include('partials.holiday-card', ['holiday' => $item])
                                 </div>
                             @else
@@ -80,7 +83,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         @foreach($upcoming90 as $item)
                             @if(is_array($item) && ($item['type'] ?? '') === 'holiday')
-                                <div x-show="showHolidays" x-cloak>
+                                <div x-data="{}" x-show="$store.dashboard.showHolidays" x-cloak>
                                     @include('partials.holiday-card', ['holiday' => $item])
                                 </div>
                             @else
@@ -98,7 +101,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         @foreach($laterItems as $item)
                             @if(is_array($item) && ($item['type'] ?? '') === 'holiday')
-                                <div x-show="showHolidays" x-cloak>
+                                <div x-data="{}" x-show="$store.dashboard.showHolidays" x-cloak>
                                     @include('partials.holiday-card', ['holiday' => $item])
                                 </div>
                             @else
