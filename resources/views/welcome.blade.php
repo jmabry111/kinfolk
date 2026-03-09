@@ -16,7 +16,7 @@
     <nav class="bg-slate-800 shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <img src="/images/kinfolk-logo-light.svg" alt="Kinfolk" class="h-20 w-auto">
+                <img src="/images/kinfolk-logo-light.svg" alt="Kinfolk" class="h-12 w-auto">
                 <div class="flex items-center gap-3">
                     @auth
                         <a href="{{ route('dashboard') }}"

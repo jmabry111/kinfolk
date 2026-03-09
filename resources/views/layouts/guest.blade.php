@@ -18,7 +18,7 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
             <div>
                 <a href="/">
-                    <img src="/images/kinfolk-logo-square.svg" alt="Kinfolk" class="h-20 w-auto">
+                    <img src="/images/kinfolk-logo-square.svg" alt="Kinfolk" class="h-16 w-auto">
                 </a>
             </div>
 
