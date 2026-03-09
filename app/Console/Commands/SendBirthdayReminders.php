@@ -32,6 +32,7 @@ class SendBirthdayReminders extends Command
                         new BirthdayReminder($contact, $days)
                     );
                     $sent++;
+                    usleep(600000);
                 }
             }
         }
