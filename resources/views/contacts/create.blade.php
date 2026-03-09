@@ -119,7 +119,7 @@
                                 <select name="generation"
                                         class="w-full rounded-lg border-slate-300 focus:border-sage-400 focus:ring-sage-400">
                                     <option value="">-- Select Generation --</option>
-                                    @foreach(['Gen Z', 'Millennial', 'Gen X', 'Baby Boomer', 'Silent Generation'] as $gen)
+                                    @foreach(['Gen Beta', 'Gen Alpha', 'Gen Z', 'Millennial', 'Gen X', 'Baby Boomer', 'Silent Gen'] as $gen)
                                         <option value="{{ $gen }}" {{ old('generation') == $gen ? 'selected' : '' }}>
                                             {{ $gen }}
                                         </option>
