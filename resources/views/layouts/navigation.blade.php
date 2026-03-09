@@ -6,7 +6,7 @@
             <div class="flex items-center">
                 <!-- Logo -->
                 <a href="{{ route('dashboard') }}" class="flex items-center mr-8">
-                    <img src="/images/kinfolk-logo-light.svg" alt="Kinfolk" class="h-20 w-auto">
+                    <img src="/images/kinfolk-logo-light.svg" alt="Kinfolk" class="h-10 w-auto">
                 </a>
 
                 <!-- Desktop Nav Links -->
