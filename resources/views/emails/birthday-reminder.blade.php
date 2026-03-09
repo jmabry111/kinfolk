@@ -10,6 +10,7 @@ Here are the birthdays coming up that you should know about:
 **{{ $contact->name }}** — in **{{ $contact->days_until_birthday }} {{ Str::plural('day', $contact->days_until_birthday) }}**
 
 **Birthday:** {{ $contact->birthday->format('F j') }}@if(!$contact->birth_year_unknown) {{ $contact->birthday->format('Y') }}@endif
+
 @if($contact->birth_year_unknown)
 **Generation:** {{ $contact->generation ?? 'Unknown' }}
 @else
