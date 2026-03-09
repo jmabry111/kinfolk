@@ -13,9 +13,6 @@
        class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded text-sm">
         Edit Contact
     </a>
-    <a href="{{ route('family-groups.show', $familyGroup) }}" class="text-indigo-600 hover:underline text-sm">
-        ← Back to {{ $familyGroup->name }}
-    </a>
 </div>
     </x-slot>
 
