@@ -4,10 +4,6 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ $familyGroup->name }}
             </h2>
-<a href="{{ route('gifts.christmas-list', $familyGroup) }}"
-   class="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-4 py-2 rounded-lg">
-    🎄 Christmas List
-</a>
             <a href="{{ route('family-groups.index') }}" class="text-indigo-600 hover:underline text-sm">
                 ← Back to Groups
             </a>
@@ -46,10 +42,16 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="text-lg font-semibold text-gray-800">Contacts</h3>
+                  <div class="flex items-center gap-2">
                     <a href="{{ route('contacts.create', $familyGroup) }}"
                        class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded text-sm">
                         + Add Contact
                     </a>
+                    <a href="{{ route('gifts.christmas-list', $familyGroup) }}"
+                       class="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-4 py-2 rounded-lg" title="Group Christmas List">
+                       🎄
+                    </a>
+                  </div>
                 </div>
                 @if($contacts->isEmpty())
                     <p class="text-gray-500 text-sm">No contacts added yet.</p>

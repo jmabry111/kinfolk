@@ -30,12 +30,21 @@
             @else
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     @foreach($groups as $group)
-                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                            <h3 class="text-lg font-semibold text-gray-800">{{ $group->name }}</h3>
-                            <p class="text-sm text-gray-500 mt-1">
-                                Owned by {{ $group->owner->name }}
-                            </p>
-                            <div class="mt-4 flex justify-between items-center">
+                        <div class="bg-white shadow-sm sm:rounded-lg p-6">
+    <div class="flex justify-between items-start mb-1">
+        <h3 class="text-lg font-semibold text-gray-800">{{ $group->name }}</h3>
+        <a href="{{ route('gifts.christmas-list', $group) }}"
+           title="Group Christmas List"
+           class="bg-red-600 hover:bg-red-700 text-white text-sm px-2.5 py-1.5 rounded-lg leading-none flex-shrink-0 ml-2">
+            🎄
+        </a>
+    </div>
+
+    <p class="text-sm text-gray-500 mt-1">
+        Owned by {{ $group->owner->name }}
+    </p>
+
+    <div class="mt-4 flex justify-between items-center">
                                 <a href="{{ route('family-groups.show', $group) }}"
                                    class="text-indigo-600 hover:underline text-sm">
                                     View Group →
@@ -51,6 +60,7 @@
                                     </form>
                                 @endif
                             </div>
+
                         </div>
                     @endforeach
                 </div>

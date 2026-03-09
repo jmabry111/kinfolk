@@ -35,6 +35,9 @@ class DashboardController extends Controller
         $holidaysWithin90 = collect(array_filter($allHolidays, fn($h) => $h['days_away'] <= 90));
         $holidaysLater    = collect(array_filter($allHolidays, fn($h) => $h['days_away'] > 90));
 
+        // Split contacts into within-90-days and later
+        $contactsLater = $contacts->where('days_away', '>', 90);
+
         // Merge and sort birthday + holiday sections
         $upcoming30 = $this->mergeSorted(
             $contacts->where('days_away', '<=', 30),
@@ -51,21 +54,24 @@ class DashboardController extends Controller
             $holidaysWithin90->filter(fn($h) => $h['days_away'] >= 61 && $h['days_away'] <= 90)
         );
 
-        $laterHolidays = $holidaysLater->sortBy('days_away')->values();
+        // Later this year: merge birthdays and holidays sorted by days_away
+        $laterItems = $this->mergeSorted($contactsLater, $holidaysLater)
+            ->sortBy('days_away')
+            ->values();
 
         return view('dashboard', compact(
             'upcoming30',
             'upcoming60',
             'upcoming90',
-            'laterHolidays'
+            'laterItems'
         ));
     }
 
     protected function mergeSorted($birthdays, $holidays): Collection
-      {
-          return collect($birthdays->values())
+    {
+        return collect($birthdays->values())
             ->concat($holidays->values())
             ->sortBy('days_away')
             ->values();
-      }
+    }
 }
