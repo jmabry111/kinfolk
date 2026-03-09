@@ -1,12 +1,14 @@
 @component('mail::message')
-# 🎂 Birthday Reminder
+# 🎂 Upcoming Birthdays
 
-Hi there!
+Hi {{ $recipient->name }}!
 
-Just a reminder that **{{ $contact->name }}** has a birthday coming up in **{{ $daysUntil }} {{ Str::plural('day', $daysUntil) }}**!
+Here are the birthdays coming up that you should know about:
 
+@foreach($contacts as $contact)
 @component('mail::panel')
-**Name:** {{ $contact->name }}
+**{{ $contact->name }}** — in **{{ $contact->days_until_birthday }} {{ Str::plural('day', $contact->days_until_birthday) }}**
+
 **Birthday:** {{ $contact->birthday->format('F j') }}@if(!$contact->birth_year_unknown) {{ $contact->birthday->format('Y') }}@endif
 @if($contact->birth_year_unknown)
 **Generation:** {{ $contact->generation ?? 'Unknown' }}
@@ -20,8 +22,10 @@ Just a reminder that **{{ $contact->name }}** has a birthday coming up in **{{ $
 @endcomponent
 
 @component('mail::button', ['url' => route('contacts.show', [$contact->family_group_id, $contact])])
-View Gift Ideas
+View Gift Ideas for {{ $contact->name }}
 @endcomponent
+
+@endforeach
 
 ---
 
