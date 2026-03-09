@@ -4,6 +4,10 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ $familyGroup->name }}
             </h2>
+<a href="{{ route('gifts.christmas-list', $familyGroup) }}"
+   class="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-4 py-2 rounded-lg">
+    🎄 Christmas List
+</a>
             <a href="{{ route('family-groups.index') }}" class="text-indigo-600 hover:underline text-sm">
                 ← Back to Groups
             </a>

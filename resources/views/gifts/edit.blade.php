@@ -18,6 +18,7 @@
                     @csrf
                     @method('PUT')
 
+                    {{-- Gift Idea --}}
                     <div class="mb-4">
                         <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Gift Idea</label>
                         <input type="text" name="description" id="description"
@@ -26,6 +27,7 @@
                         @error('description') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
                     </div>
 
+                    {{-- Budget --}}
                     <div class="mb-4">
                         <label for="budget" class="block text-sm font-medium text-gray-700 mb-1">
                             Budget <span class="text-gray-400 font-normal">(optional)</span>
@@ -40,6 +42,7 @@
                         @error('budget') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
                     </div>
 
+                    {{-- URL --}}
                     <div class="mb-4">
                         <label for="url" class="block text-sm font-medium text-gray-700 mb-1">
                             Link <span class="text-gray-400 font-normal">(optional)</span>
@@ -51,6 +54,7 @@
                         @error('url') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
                     </div>
 
+                    {{-- Visibility --}}
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700 mb-1">Visibility</label>
                         <div class="flex gap-4">
@@ -70,6 +74,19 @@
                             </label>
                         </div>
                         @error('is_public') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
+                    </div>
+
+                    {{-- Christmas List --}}
+                    <div class="mb-6 p-4 bg-red-50 border border-red-100 rounded-lg">
+                        <label class="flex items-center gap-3 cursor-pointer">
+                            <input type="checkbox" name="on_christmas_list" value="1"
+                                   {{ old('on_christmas_list', $gift->on_christmas_list) ? 'checked' : '' }}
+                                   class="rounded border-gray-300 text-red-500 focus:ring-red-400 w-5 h-5">
+                            <div>
+                                <span class="text-sm font-medium text-gray-800">🎄 Add to Christmas List</span>
+                                <p class="text-xs text-gray-500 mt-0.5">This gift will appear on the group's Christmas list</p>
+                            </div>
+                        </label>
                     </div>
 
                     <div class="flex justify-between items-center mt-6">

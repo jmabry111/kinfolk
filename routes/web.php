@@ -53,6 +53,11 @@ Route::middleware('auth')->prefix('family-groups/{familyGroup}/contacts/{contact
     Route::delete('gifts/{gift}', [GiftController::class, 'destroy'])->name('gifts.destroy');
 });
 
+// Christmas List (scoped to group, not contact)
+Route::middleware('auth')->prefix('family-groups/{familyGroup}')->group(function () {
+    Route::get('christmas-list', [GiftController::class, 'christmasList'])->name('gifts.christmas-list');
+});
+
 // Invites
 Route::middleware('auth')->get('family-groups/{familyGroup}/invite', [GroupInviteController::class, 'create'])
     ->name('invites.create');
