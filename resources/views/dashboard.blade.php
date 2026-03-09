@@ -7,7 +7,7 @@
 <button @click="$store.dashboard.toggle()"
         class="flex items-center gap-2 text-sm text-slate-600 font-medium cursor-pointer">
     <span>🎉 Holidays</span>
-    <div class="relative inline-flex items-center w-11 h-6 rounded-full transition-colors duration-200"
+    <div class="relative inline-flex items-center w-11 h-4 rounded-full transition-colors duration-200"
          :class="$store.dashboard.showHolidays ? 'bg-green-500' : 'bg-slate-300'">
         <span class="inline-block w-4 h-4 bg-white rounded-full shadow transform transition-transform duration-200"
               :class="$store.dashboard.showHolidays ? 'translate-x-6' : 'translate-x-1'">
@@ -39,7 +39,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         @foreach($upcoming30 as $item)
                             @if(is_array($item) && ($item['type'] ?? '') === 'holiday')
-                                <div x-data="{}" x-show="$store.dashboard.showHolidays" x-cloak>
+                                <div x-data="{}" x-show="$store.dashboard.showHolidays" x-cloak class="contents">
                                     @include('partials.holiday-card', ['holiday' => $item])
                                 </div>
                             @else
@@ -61,7 +61,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         @foreach($upcoming60 as $item)
                             @if(is_array($item) && ($item['type'] ?? '') === 'holiday')
-                                <div x-data="{}" x-show="$store.dashboard.showHolidays" x-cloak>
+                                <div x-data="{}" x-show="$store.dashboard.showHolidays" x-cloak class="contents">
                                     @include('partials.holiday-card', ['holiday' => $item])
                                 </div>
                             @else
@@ -83,7 +83,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         @foreach($upcoming90 as $item)
                             @if(is_array($item) && ($item['type'] ?? '') === 'holiday')
-                                <div x-data="{}" x-show="$store.dashboard.showHolidays" x-cloak>
+                                <div x-data="{}" x-show="$store.dashboard.showHolidays" x-cloak class="contents">
                                     @include('partials.holiday-card', ['holiday' => $item])
                                 </div>
                             @else
@@ -101,7 +101,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         @foreach($laterItems as $item)
                             @if(is_array($item) && ($item['type'] ?? '') === 'holiday')
-                                <div x-data="{}" x-show="$store.dashboard.showHolidays" x-cloak>
+                                <div x-data="{}" x-show="$store.dashboard.showHolidays" x-cloak class="contents">
                                     @include('partials.holiday-card', ['holiday' => $item])
                                 </div>
                             @else

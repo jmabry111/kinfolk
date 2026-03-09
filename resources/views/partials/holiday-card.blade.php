@@ -1,9 +1,7 @@
-<div class="relative rounded-2xl overflow-hidden shadow-md col-span-1 min-h-[120px] flex items-end"
+<div class="relative rounded-2xl overflow-hidden shadow-md col-span-1 flex items-end self-stretch"
      style="{{ $holiday['image'] ? 'background-image: url(' . $holiday['image'] . '); background-size: cover; background-position: center;' : 'background-color: #9FC8A9;' }}">
-
     {{-- Overlay --}}
     <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-
     {{-- Content --}}
     <div class="relative z-10 p-4 w-full">
         <div class="flex items-end justify-between">
