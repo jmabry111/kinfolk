@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,8 +21,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-       if (config('app.env') === 'production') {
-         URL::forceScheme('https');
-       }
+        if (config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
+
+        // Force a fresh DB connection when running console commands (e.g. scheduler)
+        // to prevent "MySQL server has gone away" from Railway's idle connection timeout.
+        if ($this->app->runningInConsole()) {
+            DB::reconnect();
+        }
     }
 }
