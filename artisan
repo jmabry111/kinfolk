@@ -1,18 +1,41 @@
 #!/usr/bin/env php
 <?php
 
-use Illuminate\Foundation\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 
 define('LARAVEL_START', microtime(true));
 
-// Register the Composer autoloader...
-require __DIR__.'/vendor/autoload.php';
+// Ensure the script works whether or not there's an autoloader.
+if (file_exists($autoload = __DIR__.'/vendor/autoload.php')) {
+    require $autoload;
+}
 
-// Bootstrap Laravel and handle the command...
-/** @var Application $app */
 $app = require_once __DIR__.'/bootstrap/app.php';
 
-$status = $app->handleCommand(new ArgvInput);
+// Handle "MySQL server has gone away" on Railway by retrying once with a fresh connection
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+
+$attempt = 0;
+$maxAttempts = 2;
+
+while ($attempt < $maxAttempts) {
+    try {
+        $status = $kernel->handle(
+            $input = new ArgvInput,
+            new Symfony\Component\Console\Output\ConsoleOutput
+        );
+        break;
+    } catch (\Illuminate\Database\QueryException $e) {
+        $attempt++;
+        if ($attempt >= $maxAttempts || !str_contains($e->getMessage(), 'server has gone away')) {
+            throw $e;
+        }
+        // Force reconnect and retry
+        $app->make('db')->reconnect();
+        sleep(1);
+    }
+}
+
+$kernel->terminate($input, $status);
 
 exit($status);
