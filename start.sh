@@ -10,7 +10,8 @@ fi
 
 echo "=== Kinfolk Startup ==="
 echo "Waiting for database..."
-until mysqladmin ping -h mysql --silent 2>/dev/null; do
+until php -r "new PDO('mysql:host=mysql;port=3306;dbname=railway', 'root', '${DB_PASSWORD}');" 2>/dev/null; do
+
   echo "DB not ready, retrying in 3s..."
   sleep 3
 done
