@@ -1,5 +1,0 @@
-# .ward.yml configuration
-ignore:
-  - 'database/seeders/*'
-  - 'tests/Feature/Auth/*'
-  - 'routes/web.php'

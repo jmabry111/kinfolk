@@ -1,0 +1,231 @@
+{
+  "version": "1.0",
+  "created_at": "2026-03-11T15:56:48.038775082Z",
+  "updated_at": "2026-03-11T15:56:48.038775114Z",
+  "entries": [
+    {
+      "fingerprint": "c1db7201ea1e29f2e711b85d",
+      "id": "ENV-001",
+      "file": ".env",
+      "line": 0,
+      "title": "No .env file found",
+      "severity": "Info"
+    },
+    {
+      "fingerprint": "1ba461a0c56c9f84304748db",
+      "id": "AUTH-001",
+      "file": "routes/web.php",
+      "line": 25,
+      "title": "Route without middleware",
+      "severity": "Low"
+    },
+    {
+      "fingerprint": "bf40462863839435465cc6d8",
+      "id": "AUTH-001",
+      "file": "routes/web.php",
+      "line": 26,
+      "title": "Route without middleware",
+      "severity": "Low"
+    },
+    {
+      "fingerprint": "a9c2359fea643f7ad9508702",
+      "id": "AUTH-001",
+      "file": "routes/web.php",
+      "line": 27,
+      "title": "Route without middleware",
+      "severity": "Low"
+    },
+    {
+      "fingerprint": "0e2a020b0d8652c5999aad53",
+      "id": "AUTH-001",
+      "file": "routes/web.php",
+      "line": 38,
+      "title": "Route without middleware",
+      "severity": "Low"
+    },
+    {
+      "fingerprint": "f41ef2cb1cac490d336bebfd",
+      "id": "AUTH-001",
+      "file": "routes/web.php",
+      "line": 39,
+      "title": "Route without middleware",
+      "severity": "Low"
+    },
+    {
+      "fingerprint": "e75d668628604733e2c1042c",
+      "id": "AUTH-001",
+      "file": "routes/web.php",
+      "line": 40,
+      "title": "Route without middleware",
+      "severity": "Low"
+    },
+    {
+      "fingerprint": "6d0fbdd80ee3c322b60af61c",
+      "id": "AUTH-001",
+      "file": "routes/web.php",
+      "line": 41,
+      "title": "Route without middleware",
+      "severity": "Low"
+    },
+    {
+      "fingerprint": "c5bcf3484a2ea5f0e307e3cb",
+      "id": "AUTH-001",
+      "file": "routes/web.php",
+      "line": 42,
+      "title": "Route without middleware",
+      "severity": "Low"
+    },
+    {
+      "fingerprint": "cbe2206da2f2ebd0d8824e2e",
+      "id": "AUTH-001",
+      "file": "routes/web.php",
+      "line": 43,
+      "title": "Route without middleware",
+      "severity": "Low"
+    },
+    {
+      "fingerprint": "c0b2ab0764499bf5e75ef8cf",
+      "id": "AUTH-001",
+      "file": "routes/web.php",
+      "line": 48,
+      "title": "Route without middleware",
+      "severity": "Low"
+    },
+    {
+      "fingerprint": "eed6566c8b9c73e394314cae",
+      "id": "AUTH-001",
+      "file": "routes/web.php",
+      "line": 49,
+      "title": "Route without middleware",
+      "severity": "Low"
+    },
+    {
+      "fingerprint": "016eefce3f97273c8502bb0d",
+      "id": "AUTH-001",
+      "file": "routes/web.php",
+      "line": 50,
+      "title": "Route without middleware",
+      "severity": "Low"
+    },
+    {
+      "fingerprint": "643c58722a0db4022881d9c6",
+      "id": "AUTH-001",
+      "file": "routes/web.php",
+      "line": 51,
+      "title": "Route without middleware",
+      "severity": "Low"
+    },
+    {
+      "fingerprint": "fe2692c361b101099d3ea011",
+      "id": "AUTH-001",
+      "file": "routes/web.php",
+      "line": 52,
+      "title": "Route without middleware",
+      "severity": "Low"
+    },
+    {
+      "fingerprint": "c65fd0a79d45c6208e5a3787",
+      "id": "AUTH-001",
+      "file": "routes/web.php",
+      "line": 53,
+      "title": "Route without middleware",
+      "severity": "Low"
+    },
+    {
+      "fingerprint": "e2f7b879df5e81872b11cc6f",
+      "id": "AUTH-001",
+      "file": "routes/web.php",
+      "line": 58,
+      "title": "Route without middleware",
+      "severity": "Low"
+    },
+    {
+      "fingerprint": "12ed6b51ab1624dcec4aca02",
+      "id": "AUTH-001",
+      "file": "routes/web.php",
+      "line": 69,
+      "title": "Route without middleware",
+      "severity": "Low"
+    },
+    {
+      "fingerprint": "896314a196dec77a2639a739",
+      "id": "AUTH-001",
+      "file": "routes/web.php",
+      "line": 70,
+      "title": "Route without middleware",
+      "severity": "Low"
+    },
+    {
+      "fingerprint": "e3a968f791d7019834826c19",
+      "id": "AUTH-001",
+      "file": "routes/web.php",
+      "line": 71,
+      "title": "Route without middleware",
+      "severity": "Low"
+    },
+    {
+      "fingerprint": "bf6d1a2f99ee7cb51a105948",
+      "id": "AUTH-001",
+      "file": "routes/web.php",
+      "line": 72,
+      "title": "Route without middleware",
+      "severity": "Low"
+    },
+    {
+      "fingerprint": "908af830f02e745fbee09450",
+      "id": "AUTH-001",
+      "file": "routes/web.php",
+      "line": 76,
+      "title": "Route without middleware",
+      "severity": "Low"
+    },
+    {
+      "fingerprint": "3a6e6257d980122c9e33bed1",
+      "id": "CRYPTO-002",
+      "file": "tests/Feature/Auth/EmailVerificationTest.php",
+      "line": 24,
+      "title": "sha1() used for security purposes",
+      "severity": "Medium"
+    },
+    {
+      "fingerprint": "709b711cb4c9bcd2c585e4f6",
+      "id": "CRYPTO-002",
+      "file": "tests/Feature/Auth/EmailVerificationTest.php",
+      "line": 40,
+      "title": "sha1() used for security purposes",
+      "severity": "Medium"
+    },
+    {
+      "fingerprint": "ea676c3cbe14e85338133e3e",
+      "id": "CRYPTO-003",
+      "file": "database/seeders/KinfolkSeeder.php",
+      "line": 48,
+      "title": "Weak random number generation",
+      "severity": "High"
+    },
+    {
+      "fingerprint": "c8d713d6a1b16209d6dccf34",
+      "id": "CRYPTO-003",
+      "file": "database/seeders/KinfolkSeeder.php",
+      "line": 62,
+      "title": "Weak random number generation",
+      "severity": "High"
+    },
+    {
+      "fingerprint": "da88a61fcd60c3c954680cb2",
+      "id": "CRYPTO-003",
+      "file": "database/seeders/KinfolkSeeder.php",
+      "line": 67,
+      "title": "Weak random number generation",
+      "severity": "High"
+    },
+    {
+      "fingerprint": "ab8d54951774639a82350d74",
+      "id": "CRYPTO-003",
+      "file": "database/seeders/KinfolkSeeder.php",
+      "line": 99,
+      "title": "Weak random number generation",
+      "severity": "High"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "project": {
+    "name": "laravel/laravel",
+    "path": "/home/jason/git/kinfolk",
+    "laravel_version": "^12.0",
+    "php_version": "^8.2"
+  },
+  "summary": {
+    "total_findings": 0,
+    "by_severity": {},
+    "duration": "709.960451ms",
+    "scanners_run": [
+      "env-scanner",
+      "config-scanner",
+      "dependency-scanner",
+      "rules-scanner"
+    ]
+  },
+  "findings": []
+}
