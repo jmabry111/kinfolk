@@ -1,11 +1,15 @@
 #!/bin/bash
 set -e
 
+if [ "$SERVICE_TYPE" = "scheduler" ]; then
+  echo "=== Kinfolk Scheduler ==="
+  sleep 5
+  php artisan schedule:run
+  exit 0
+fi
+
 echo "=== Kinfolk Startup ==="
-
-echo "Storage permissions..."
 chmod -R 775 /app/storage /app/bootstrap/cache
-
 echo "Running migrations..."
 php artisan migrate --force
 
