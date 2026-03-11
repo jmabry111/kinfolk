@@ -9,6 +9,11 @@ if [ "$SERVICE_TYPE" = "scheduler" ]; then
 fi
 
 echo "=== Kinfolk Startup ==="
+echo "Waiting for database..."
+until mysqladmin ping -h mysql --silent 2>/dev/null; do
+  echo "DB not ready, retrying in 3s..."
+  sleep 3
+done
 chmod -R 775 /app/storage /app/bootstrap/cache
 echo "Running migrations..."
 php artisan migrate --force
