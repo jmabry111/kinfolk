@@ -9,4 +9,4 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-Schedule::command('kinfolk:send-birthday-reminders')->dailyAt('10:30');
+Schedule::command('kinfolk:send-birthday-reminders')->dailyAt('11:00');
