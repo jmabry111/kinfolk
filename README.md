@@ -12,9 +12,15 @@ Kinfolk is a warm, family-friendly web app that helps you stay connected with th
 - **Kin & Folk Classification** — classify contacts as Kin (family) or Folk (friends & others)
 - **Gift Ideas** — track gift ideas per person with public/private visibility and purchased state
 - **Anonymous Purchase Tracking** — mark gifts as "covered" without revealing who bought them
+- **Christmas List** — dedicated holiday gift list with print and PDF export
 - **Family Groups** — create shared groups and invite members to coordinate together
 - **Invite Links** — share single-use, expiring invite links with family and friends
+- **Welcome Email** — new members receive a welcome email when they accept an invite
 - **Email Reminders** — automated birthday reminders sent 30 and 7 days in advance
+- **Holiday Awareness** — upcoming holidays displayed alongside birthdays
+- **Profile Settings** — update your name, email, and password
+- **Guided Walkthrough Tour** — interactive onboarding tour powered by Shepherd.js
+- **Admin Interface** — administrative tools for managing the app
 - **Responsive UI** — works on desktop and mobile
 
 ---
@@ -24,10 +30,10 @@ Kinfolk is a warm, family-friendly web app that helps you stay connected with th
 | Layer | Technology |
 |---|---|
 | Framework | [Laravel 12](https://laravel.com) |
-| Frontend | Blade, Tailwind CSS, Alpine.js |
-| Database | MariaDB (via Laravel Sail) |
+| Frontend | Blade, Tailwind CSS, Alpine.js, Livewire |
+| Database | MariaDB (local via Laravel Sail), MySQL (production) |
 | Auth | Laravel Breeze |
-| Mail | Mailpit (local), SMTP (production) |
+| Mail | Mailpit (local), [Resend](https://resend.com) (production) |
 | Dev Environment | Docker / Laravel Sail |
 
 ---
@@ -113,10 +119,10 @@ Birthday reminders are sent via a scheduled Artisan command:
 sail artisan kinfolk:send-birthday-reminders
 ```
 
-This command sends reminders for any contacts with birthdays exactly **7 or 30 days** from today. In production, schedule it to run daily at 8:00 AM via `routes/console.php`:
+This command sends a single email per user covering all contacts with birthdays exactly **7 or 30 days** from today. In production, the command runs daily at 6:00 AM via `routes/console.php`:
 
 ```php
-Schedule::command('kinfolk:send-birthday-reminders')->dailyAt('08:00');
+Schedule::command('kinfolk:send-birthday-reminders')->dailyAt('6:00');
 ```
 
 For local development, emails are caught by [Mailpit](http://localhost:8025).
@@ -129,8 +135,9 @@ For local development, emails are caught by [Mailpit](http://localhost:8025).
 app/
 ├── Console/Commands/       # SendBirthdayReminders command
 ├── Http/Controllers/       # FamilyGroup, Contact, Gift, GroupInvite, Dashboard
-├── Mail/                   # BirthdayReminder mailable
+├── Mail/                   # BirthdayReminder, WelcomeEmail mailables
 ├── Models/                 # User, FamilyGroup, Contact, Gift, GroupInvite
+├── Services/               # HolidayService
 database/
 ├── migrations/             # All database migrations
 ├── seeders/                # SitcomSeeder
@@ -141,10 +148,10 @@ resources/
 │   ├── contacts/           # create, edit, show
 │   ├── gifts/              # create, edit
 │   ├── invites/            # created, invalid
-│   ├── emails/             # birthday-reminder
+│   ├── emails/             # birthday-reminder, welcome
 │   ├── partials/           # birthday-card
 │   └── welcome.blade.php   # Public landing page
-public/images/              # Logo files (color + light versions)
+public/images/              # Logo files, holiday images
 routes/
 ├── web.php                 # All web routes
 └── console.php             # Scheduled commands
@@ -188,12 +195,10 @@ Fonts: **Playfair Display** (serif/display) + **Lato** (body)
 
 ## 🗺 Roadmap
 
-- [ ] Profile settings (name, email, password)
 - [ ] Contact photo uploads
 - [ ] Wishlist view — let contacts add their own gift wishes
 - [ ] Push notifications
 - [ ] Mobile app (React Native)
-- [ ] Admin dashboard
 
 ---
 
