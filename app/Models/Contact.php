@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Contact extends Model
 {
+    
+    use HasFactory;
+
     protected $fillable = ['family_group_id', 'added_by', 'name', 'relationship_type', 'birthday', 'interest_tags', 'is_kin', 'birth_year_unknown', 'generation'];
 
     protected $casts = [
