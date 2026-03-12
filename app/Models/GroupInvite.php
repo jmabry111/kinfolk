@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class GroupInvite extends Model
 {
+    use HasFactory;
     protected $fillable = ['family_group_id', 'created_by', 'token', 'expires_at', 'used_at'];
 
     protected $casts = [

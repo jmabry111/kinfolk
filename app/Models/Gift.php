@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Gift extends Model
 {
+    use HasFactory;
     protected $fillable = ['contact_id', 'user_id', 'description', 'budget', 'url', 'is_public', 'is_purchased', 'purchased_by', 'on_christmas_list'];
 
     protected $casts = [
