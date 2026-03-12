@@ -6,7 +6,6 @@ use App\Mail\BirthdayReminder;
 use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class SendBirthdayReminders extends Command
@@ -16,7 +15,6 @@ class SendBirthdayReminders extends Command
 
     public function handle()
     {
-        DB::reconnect();
 
         $reminderDays = [7, 30];
         $sent = 0;
