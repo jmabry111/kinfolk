@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: composer install --no-interaction --prefer-dist --ignore-platform-reqs
 
-        name: Copy env
+      - name: Copy env
         run: |
           echo "APP_NAME=Kinfolk" >> .env
           echo "APP_ENV=testing" >> .env
