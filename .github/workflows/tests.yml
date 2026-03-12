@@ -16,8 +16,9 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.2
+          php-version: 8.5
           extensions: mbstring, pdo, pdo_sqlite
+          ini-values: gc_enabled=1
 
       - name: Install dependencies
         run: composer install --no-interaction --prefer-dist --ignore-platform-reqs
