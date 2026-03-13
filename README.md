@@ -2,7 +2,7 @@
 
 > *Never forget a birthday again.*
 
-Kinfolk is a warm, family-friendly web app that helps you stay connected with the people who matter most. Track birthdays, coordinate gift ideas, and show up for your family and friends — with a little southern hospitality.
+[Kinfolk](https://kinfolk-production.up.railway.app) is a warm, family-friendly web app that helps you stay connected with the people who matter most. Track birthdays, coordinate gift ideas, and show up for your family and friends — with a little southern hospitality.
 
 ---
 
