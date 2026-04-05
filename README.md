@@ -1,4 +1,4 @@
-# Kinfolk 🪑❤️
+# Kinfolk 🪑❤️  (name still under eval)
 
 > *Never forget a birthday again.*
 
